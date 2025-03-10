@@ -23,14 +23,12 @@ public class PlantController {
         return plants.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
-    // Récupérer un plant par son id
     @GetMapping("/{id}")
     public PlantDTO getPlantById(@PathVariable long id) {
         Plant plant = plantService.findById(id);
         return convertToDTO(plant);
     }
 
-    // Créer un nouveau plant
     @PostMapping
     public PlantDTO createPlant(@RequestBody PlantDTO plantDTO) {
         Plant plant = convertToEntity(plantDTO);
@@ -38,7 +36,6 @@ public class PlantController {
         return plantDTO;
     }
 
-    // Mettre à jour un plant existant
     @PutMapping("/{id}")
     public PlantDTO updatePlant(@PathVariable long id, @RequestBody PlantDTO plantDTO) {
         Plant plant = convertToEntity(plantDTO);
@@ -47,7 +44,6 @@ public class PlantController {
         return plantDTO;
     }
 
-    // Supprimer un plant
     @DeleteMapping("/{id}")
     public void deletePlant(@PathVariable long id) {
         plantService.delete(id);

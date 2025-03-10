@@ -16,21 +16,18 @@ public class ZombieController {
         this.zombieService = zombieService;
     }
 
-    // Récupérer tous les zombies
     @GetMapping
     public List<ZombieDTO> getAllZombies() {
         List<Zombie> zombies = zombieService.findAll();
         return zombies.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
-    // Récupérer un zombie par son id
     @GetMapping("/{id}")
     public ZombieDTO getZombieById(@PathVariable long id) {
         Zombie zombie = zombieService.findById(id);
         return convertToDTO(zombie);
     }
 
-    // Créer un nouveau zombie
     @PostMapping
     public ZombieDTO createZombie(@RequestBody ZombieDTO zombieDTO) {
         Zombie zombie = convertToEntity(zombieDTO);
@@ -38,7 +35,6 @@ public class ZombieController {
         return zombieDTO;
     }
 
-    // Mettre à jour un zombie existant
     @PutMapping("/{id}")
     public ZombieDTO updateZombie(@PathVariable long id, @RequestBody ZombieDTO zombieDTO) {
         Zombie zombie = convertToEntity(zombieDTO);
@@ -47,7 +43,6 @@ public class ZombieController {
         return zombieDTO;
     }
 
-    // Supprimer un zombie
     @DeleteMapping("/{id}")
     public void deleteZombie(@PathVariable long id) {
         zombieService.delete(id);

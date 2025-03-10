@@ -10,10 +10,8 @@ public class Zombie {
     private String cheminImage;
     private long idMap;
 
-    // Constructeur par défaut
     public Zombie() {}
 
-    // Constructeur avec paramètres
     public Zombie(long idZombie, String nom, int pointDeVie, double attaqueParSeconde,
                   int degatAttaque, double vitesseDeDeplacement, String cheminImage, long idMap) {
         this.idZombie = idZombie;

@@ -10,10 +10,8 @@ public class ZombieDTO {
     private String cheminImage;
     private long idMap;
 
-    // Constructeur par défaut
     public ZombieDTO() {}
 
-    // Getters et setters
     public long getIdZombie() {
         return idZombie;
     }

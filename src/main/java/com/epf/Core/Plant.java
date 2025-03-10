@@ -11,10 +11,8 @@ public class Plant {
     private String effet;
     private String cheminImage;
 
-    // Constructeur par défaut
     public Plant() {}
 
-    // Constructeur avec paramètres
     public Plant(long idPlante, String nom, int pointDeVie, double attaqueParSeconde,
                  int degatAttaque, int cout, double soleilParSeconde, String effet, String cheminImage) {
         this.idPlante = idPlante;
@@ -28,7 +26,6 @@ public class Plant {
         this.cheminImage = cheminImage;
     }
 
-    // Getters et setters
     public long getIdPlante() {
         return idPlante;
     }

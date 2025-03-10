@@ -16,21 +16,18 @@ public class GameMapController {
         this.gameMapService = gameMapService;
     }
 
-    // Récupérer toutes les maps
     @GetMapping
     public List<GameMapDTO> getAllMaps() {
         List<GameMap> maps = gameMapService.findAll();
         return maps.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
-    // Récupérer une map par son id
     @GetMapping("/{id}")
     public GameMapDTO getMapById(@PathVariable long id) {
         GameMap map = gameMapService.findById(id);
         return convertToDTO(map);
     }
 
-    // Créer une nouvelle map
     @PostMapping
     public GameMapDTO createMap(@RequestBody GameMapDTO gameMapDTO) {
         GameMap map = convertToEntity(gameMapDTO);
@@ -38,7 +35,6 @@ public class GameMapController {
         return gameMapDTO;
     }
 
-    // Mettre à jour une map existante
     @PutMapping("/{id}")
     public GameMapDTO updateMap(@PathVariable long id, @RequestBody GameMapDTO gameMapDTO) {
         GameMap map = convertToEntity(gameMapDTO);
@@ -47,7 +43,6 @@ public class GameMapController {
         return gameMapDTO;
     }
 
-    // Supprimer une map
     @DeleteMapping("/{id}")
     public void deleteMap(@PathVariable long id) {
         gameMapService.delete(id);
