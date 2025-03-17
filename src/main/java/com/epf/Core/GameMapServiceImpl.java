@@ -2,7 +2,9 @@ package com.epf.Core;
 
 import java.util.List;
 import com.epf.Persistance.GameMapDao;
+import org.springframework.stereotype.Service;
 
+@Service
 public class GameMapServiceImpl implements GameMapService {
 
     private final GameMapDao gameMapDao;

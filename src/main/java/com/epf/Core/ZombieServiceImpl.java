@@ -2,7 +2,9 @@ package com.epf.Core;
 
 import java.util.List;
 import com.epf.Persistance.ZombieDao;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ZombieServiceImpl implements ZombieService {
 
     private final ZombieDao zombieDao;

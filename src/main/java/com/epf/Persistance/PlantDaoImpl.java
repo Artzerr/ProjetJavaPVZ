@@ -3,8 +3,11 @@ package com.epf.Persistance;
 import com.epf.Core.Plant;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
+@Repository
 public class PlantDaoImpl implements PlantDao {
 
     private final JdbcTemplate jdbcTemplate;

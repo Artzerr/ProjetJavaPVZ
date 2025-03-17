@@ -2,7 +2,9 @@ package com.epf.Core;
 
 import java.util.List;
 import com.epf.Persistance.PlantDao;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PlantServiceImpl implements PlantService {
 
     private final PlantDao plantDao;

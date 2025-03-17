@@ -1,6 +1,7 @@
 package com.epf.Persistance;
 
 import com.epf.Core.Zombie;
+
 import java.util.List;
 
 public interface ZombieDao {

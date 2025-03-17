@@ -1,9 +1,11 @@
 package com.epf;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jdbc.core.JdbcTemplate;
 import com.epf.Persistance.DatabaseConfig;
 
+@ComponentScan(basePackages = "com.epf")
 public class Main {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context =
