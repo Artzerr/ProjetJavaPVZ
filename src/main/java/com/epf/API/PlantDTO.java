@@ -1,24 +1,43 @@
 package com.epf.API;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class PlantDTO {
-    private long idPlante;
+    @JsonProperty("id_plante")
+    private long id_plante;
+    
+    @JsonProperty("nom")
     private String nom;
-    private int pointDeVie;
-    private double attaqueParSeconde;
-    private int degatAttaque;
+    
+    @JsonProperty("point_de_vie")
+    private int point_de_vie;
+    
+    @JsonProperty("attaque_par_seconde")
+    private double attaque_par_seconde;
+    
+    @JsonProperty("degat_attaque")
+    private int degat_attaque;
+    
+    @JsonProperty("cout")
     private int cout;
-    private double soleilParSeconde;
+    
+    @JsonProperty("soleil_par_seconde")
+    private double soleil_par_seconde;
+    
+    @JsonProperty("effet")
     private String effet;
-    private String cheminImage;
+    
+    @JsonProperty("chemin_image")
+    private String chemin_image;
 
     public PlantDTO() {}
 
     public long getIdPlante() {
-        return idPlante;
+        return id_plante;
     }
 
-    public void setIdPlante(long idPlante) {
-        this.idPlante = idPlante;
+    public void setIdPlante(long id_plante) {
+        this.id_plante = id_plante;
     }
 
     public String getNom() {
@@ -30,27 +49,27 @@ public class PlantDTO {
     }
 
     public int getPointDeVie() {
-        return pointDeVie;
+        return point_de_vie;
     }
 
-    public void setPointDeVie(int pointDeVie) {
-        this.pointDeVie = pointDeVie;
+    public void setPointDeVie(int point_de_vie) {
+        this.point_de_vie = point_de_vie;
     }
 
     public double getAttaqueParSeconde() {
-        return attaqueParSeconde;
+        return attaque_par_seconde;
     }
 
-    public void setAttaqueParSeconde(double attaqueParSeconde) {
-        this.attaqueParSeconde = attaqueParSeconde;
+    public void setAttaqueParSeconde(double attaque_par_seconde) {
+        this.attaque_par_seconde = attaque_par_seconde;
     }
 
     public int getDegatAttaque() {
-        return degatAttaque;
+        return degat_attaque;
     }
 
-    public void setDegatAttaque(int degatAttaque) {
-        this.degatAttaque = degatAttaque;
+    public void setDegatAttaque(int degat_attaque) {
+        this.degat_attaque = degat_attaque;
     }
 
     public int getCout() {
@@ -62,11 +81,11 @@ public class PlantDTO {
     }
 
     public double getSoleilParSeconde() {
-        return soleilParSeconde;
+        return soleil_par_seconde;
     }
 
-    public void setSoleilParSeconde(double soleilParSeconde) {
-        this.soleilParSeconde = soleilParSeconde;
+    public void setSoleilParSeconde(double soleil_par_seconde) {
+        this.soleil_par_seconde = soleil_par_seconde;
     }
 
     public String getEffet() {
@@ -78,10 +97,10 @@ public class PlantDTO {
     }
 
     public String getCheminImage() {
-        return cheminImage;
+        return chemin_image;
     }
 
-    public void setCheminImage(String cheminImage) {
-        this.cheminImage = cheminImage;
+    public void setCheminImage(String chemin_image) {
+        this.chemin_image = chemin_image;
     }
 }

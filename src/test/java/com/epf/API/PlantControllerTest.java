@@ -11,7 +11,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Arrays;
 
-//import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
@@ -40,7 +39,7 @@ class PlantControllerTest {
 
         when(plantService.findAll()).thenReturn(Arrays.asList(plant1, plant2));
 
-        mockMvc.perform(get("/plants").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/plantes").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].idPlante").value(1))
                 .andExpect(jsonPath("$[0].nom").value("Tournesol"))
@@ -53,7 +52,7 @@ class PlantControllerTest {
         Plant plant = new Plant(1, "Tournesol", 100, 0.0, 0, 50, 25.0, "normal", "images/plante/tournesol.png");
         when(plantService.findById(1)).thenReturn(plant);
 
-        mockMvc.perform(get("/plants/1").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/plantes/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.idPlante").value(1))
                 .andExpect(jsonPath("$.nom").value("Tournesol"));
@@ -63,9 +62,9 @@ class PlantControllerTest {
     void testCreatePlant() throws Exception {
         when(plantService.create(Mockito.any(Plant.class))).thenReturn(1L);
 
-        String jsonContent = "{ \"nom\": \"Tournesol\", \"pointDeVie\": 100, \"attaqueParSeconde\": 0.0, \"degatAttaque\": 0, \"cout\": 50, \"soleilParSeconde\": 25.0, \"effet\": \"normal\", \"cheminImage\": \"images/plante/tournesol.png\" }";
+        String jsonContent = "{ \"nom\": \"Tournesol\", \"point_de_vie\": 100, \"attaque_par_seconde\": 0.0, \"degat_attaque\": 0, \"cout\": 50, \"soleil_par_seconde\": 25.0, \"effet\": \"normal\", \"chemin_image\": \"images/plante/tournesol.png\" }";
 
-        mockMvc.perform(post("/plants")
+        mockMvc.perform(post("/plantes")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonContent))
                 .andExpect(status().isOk())
@@ -74,21 +73,21 @@ class PlantControllerTest {
 
     @Test
     void testUpdatePlant() throws Exception {
-        String updatedJson = "{ \"nom\": \"Tournesol Updated\", \"pointDeVie\": 110, \"attaqueParSeconde\": 0.0, \"degatAttaque\": 0, \"cout\": 50, \"soleilParSeconde\": 25.0, \"effet\": \"normal\", \"cheminImage\": \"images/plante/tournesol.png\" }";
+        String updatedJson = "{ \"nom\": \"Tournesol Updated\", \"point_de_vie\": 110, \"attaque_par_seconde\": 0.0, \"degat_attaque\": 0, \"cout\": 50, \"soleil_par_seconde\": 25.0, \"effet\": \"normal\", \"chemin_image\": \"images/plante/tournesol.png\" }";
 
-        mockMvc.perform(put("/plants/1")
+        mockMvc.perform(put("/plantes/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(updatedJson))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.nom").value("Tournesol Updated"))
-                .andExpect(jsonPath("$.pointDeVie").value(110));
+                .andExpect(jsonPath("$.point_de_vie").value(110));
 
         verify(plantService).update(Mockito.any(Plant.class));
     }
 
     @Test
     void testDeletePlant() throws Exception {
-        mockMvc.perform(delete("/plants/1"))
+        mockMvc.perform(delete("/plantes/1"))
                 .andExpect(status().isOk());
 
         verify(plantService).delete(1);

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/plants")
+@RequestMapping("/plantes")
 public class PlantController {
 
     private final PlantService plantService;
@@ -67,6 +67,7 @@ public class PlantController {
     // Méthode de conversion DTO -> Entity
     private Plant convertToEntity(PlantDTO dto) {
         Plant plant = new Plant();
+        plant.setIdPlante(dto.getIdPlante());
         plant.setNom(dto.getNom());
         plant.setPointDeVie(dto.getPointDeVie());
         plant.setAttaqueParSeconde(dto.getAttaqueParSeconde());
