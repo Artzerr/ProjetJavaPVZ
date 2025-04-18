@@ -46,9 +46,9 @@ class ZombieControllerTest {
         mockMvc.perform(get("/zombies")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].idZombie").value(1))
+                .andExpect(jsonPath("$[0].id_zombie").value(1))
                 .andExpect(jsonPath("$[0].nom").value("Zombie de base"))
-                .andExpect(jsonPath("$[1].idZombie").value(2))
+                .andExpect(jsonPath("$[1].id_zombie").value(2))
                 .andExpect(jsonPath("$[1].nom").value("Zombie Cone"));
     }
 
@@ -61,25 +61,23 @@ class ZombieControllerTest {
         mockMvc.perform(get("/zombies/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.idZombie").value(1))
+                .andExpect(jsonPath("$.id_zombie").value(1))
                 .andExpect(jsonPath("$.nom").value("Zombie de base"));
     }
 
     @Test
     void testCreateZombie() throws Exception {
-        // On simule le retour du service lorsqu'on crée un zombie
         when(zombieService.create(any(Zombie.class))).thenReturn(1L);
 
-        // Corps JSON qu'on enverrait dans la requête POST
         String newZombieJson = """
                 {
                     "nom": "Zombie Runner",
-                    "pointDeVie": 80,
-                    "attaqueParSeconde": 1.0,
-                    "degatAttaque": 8,
-                    "vitesseDeDeplacement": 0.7,
-                    "cheminImage": "images/zombie/runner.png",
-                    "idMap": 2
+                    "point_de_vie": 80,
+                    "attaque_par_seconde": 1.0,
+                    "degat_attaque": 8,
+                    "vitesse_de_deplacement": 0.7,
+                    "chemin_image": "images/zombie/runner.png",
+                    "id_map": 2
                 }
                 """;
 
@@ -94,26 +92,24 @@ class ZombieControllerTest {
 
     @Test
     void testUpdateZombie() throws Exception {
-        // On ne se préoccupe pas ici du retour, on vérifie juste que l'update se passe
         String updatedZombieJson = """
                 {
                     "nom": "Zombie Updated",
-                    "pointDeVie": 120,
-                    "attaqueParSeconde": 1.0,
-                    "degatAttaque": 10,
-                    "vitesseDeDeplacement": 0.6,
-                    "cheminImage": "images/zombie/updated.png",
-                    "idMap": 2
+                    "point_de_vie": 120,
+                    "attaque_par_seconde": 1.0,
+                    "degat_attaque": 10,
+                    "vitesse_de_deplacement": 0.6,
+                    "chemin_image": "images/zombie/updated.png",
+                    "id_map": 2
                 }
                 """;
 
-        // On simule un appel PUT /zombies/1
         mockMvc.perform(put("/zombies/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(updatedZombieJson))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.nom").value("Zombie Updated"))
-                .andExpect(jsonPath("$.pointDeVie").value(120));
+                .andExpect(jsonPath("$.point_de_vie").value(120));
 
         // On peut vérifier que la méthode update du service est bien appelée
         verify(zombieService).update(any(Zombie.class));

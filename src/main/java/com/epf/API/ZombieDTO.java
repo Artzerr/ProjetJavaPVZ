@@ -1,13 +1,30 @@
 package com.epf.API;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class ZombieDTO {
+    @JsonProperty("id_zombie")
     private long idZombie;
+    
+    @JsonProperty("nom")
     private String nom;
+    
+    @JsonProperty("point_de_vie")
     private int pointDeVie;
+    
+    @JsonProperty("attaque_par_seconde")
     private double attaqueParSeconde;
+    
+    @JsonProperty("degat_attaque")
     private int degatAttaque;
+    
+    @JsonProperty("vitesse_de_deplacement")
     private double vitesseDeDeplacement;
+    
+    @JsonProperty("chemin_image")
     private String cheminImage;
+    
+    @JsonProperty("id_map")
     private long idMap;
 
     public ZombieDTO() {}

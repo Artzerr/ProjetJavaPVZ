@@ -11,7 +11,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Arrays;
 
-//import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
@@ -42,9 +41,9 @@ class GameMapControllerTest {
 
         mockMvc.perform(get("/maps").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].idMap").value(1))
+                .andExpect(jsonPath("$[0].id_map").value(1))
                 .andExpect(jsonPath("$[0].ligne").value(5))
-                .andExpect(jsonPath("$[1].idMap").value(2))
+                .andExpect(jsonPath("$[1].id_map").value(2))
                 .andExpect(jsonPath("$[1].colonne").value(8));
     }
 
@@ -55,18 +54,23 @@ class GameMapControllerTest {
 
         mockMvc.perform(get("/maps/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.idMap").value(1))
+                .andExpect(jsonPath("$.id_map").value(1))
                 .andExpect(jsonPath("$.ligne").value(5))
                 .andExpect(jsonPath("$.colonne").value(9))
-                .andExpect(jsonPath("$.cheminImage").value("images/map/gazon.png"));
+                .andExpect(jsonPath("$.chemin_image").value("images/map/gazon.png"));
     }
 
     @Test
     void testCreateMap() throws Exception {
-        // On suppose que le service renvoie un ID (par exemple 1L) après création
         when(gameMapService.create(Mockito.any(GameMap.class))).thenReturn(1L);
 
-        String jsonContent = "{ \"ligne\": 5, \"colonne\": 9, \"cheminImage\": \"images/map/gazon.png\" }";
+        String jsonContent = """
+                {
+                    "ligne": 5,
+                    "colonne": 9,
+                    "chemin_image": "images/map/gazon.png"
+                }
+                """;
 
         mockMvc.perform(post("/maps")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -74,12 +78,18 @@ class GameMapControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.ligne").value(5))
                 .andExpect(jsonPath("$.colonne").value(9))
-                .andExpect(jsonPath("$.cheminImage").value("images/map/gazon.png"));
+                .andExpect(jsonPath("$.chemin_image").value("images/map/gazon.png"));
     }
 
     @Test
     void testUpdateMap() throws Exception {
-        String updatedJson = "{ \"ligne\": 6, \"colonne\": 8, \"cheminImage\": \"images/map/updated.png\" }";
+        String updatedJson = """
+                {
+                    "ligne": 6,
+                    "colonne": 8,
+                    "chemin_image": "images/map/updated.png"
+                }
+                """;
 
         mockMvc.perform(put("/maps/1")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -87,7 +97,7 @@ class GameMapControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.ligne").value(6))
                 .andExpect(jsonPath("$.colonne").value(8))
-                .andExpect(jsonPath("$.cheminImage").value("images/map/updated.png"));
+                .andExpect(jsonPath("$.chemin_image").value("images/map/updated.png"));
 
         verify(gameMapService).update(Mockito.any(GameMap.class));
     }
