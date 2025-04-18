@@ -41,9 +41,9 @@ class PlantControllerTest {
 
         mockMvc.perform(get("/plantes").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].idPlante").value(1))
+                .andExpect(jsonPath("$[0].id_plante").value(1))
                 .andExpect(jsonPath("$[0].nom").value("Tournesol"))
-                .andExpect(jsonPath("$[1].idPlante").value(2))
+                .andExpect(jsonPath("$[1].id_plante").value(2))
                 .andExpect(jsonPath("$[1].nom").value("Pois Tireur"));
     }
 
@@ -54,26 +54,49 @@ class PlantControllerTest {
 
         mockMvc.perform(get("/plantes/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.idPlante").value(1))
-                .andExpect(jsonPath("$.nom").value("Tournesol"));
+                .andExpect(jsonPath("$.id_plante").value(1))
+                .andExpect(jsonPath("$.nom").value("Tournesol"))
+                .andExpect(jsonPath("$.point_de_vie").value(100))
+                .andExpect(jsonPath("$.chemin_image").value("images/plante/tournesol.png"));
     }
 
     @Test
     void testCreatePlant() throws Exception {
         when(plantService.create(Mockito.any(Plant.class))).thenReturn(1L);
 
-        String jsonContent = "{ \"nom\": \"Tournesol\", \"point_de_vie\": 100, \"attaque_par_seconde\": 0.0, \"degat_attaque\": 0, \"cout\": 50, \"soleil_par_seconde\": 25.0, \"effet\": \"normal\", \"chemin_image\": \"images/plante/tournesol.png\" }";
+        String jsonContent = """
+                {
+                    "nom": "Tournesol",
+                    "point_de_vie": 100,
+                    "attaque_par_seconde": 0.0,
+                    "degat_attaque": 0,
+                    "cout": 50,
+                    "soleil_par_seconde": 25.0,
+                    "effet": "normal",
+                    "chemin_image": "images/plante/tournesol.png"
+                }""";
 
         mockMvc.perform(post("/plantes")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonContent))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.nom").value("Tournesol"));
+                .andExpect(jsonPath("$.nom").value("Tournesol"))
+                .andExpect(jsonPath("$.point_de_vie").value(100));
     }
 
     @Test
     void testUpdatePlant() throws Exception {
-        String updatedJson = "{ \"nom\": \"Tournesol Updated\", \"point_de_vie\": 110, \"attaque_par_seconde\": 0.0, \"degat_attaque\": 0, \"cout\": 50, \"soleil_par_seconde\": 25.0, \"effet\": \"normal\", \"chemin_image\": \"images/plante/tournesol.png\" }";
+        String updatedJson = """
+                {
+                    "nom": "Tournesol Updated",
+                    "point_de_vie": 110,
+                    "attaque_par_seconde": 0.0,
+                    "degat_attaque": 0,
+                    "cout": 50,
+                    "soleil_par_seconde": 25.0,
+                    "effet": "normal",
+                    "chemin_image": "images/plante/tournesol.png"
+                }""";
 
         mockMvc.perform(put("/plantes/1")
                         .contentType(MediaType.APPLICATION_JSON)
