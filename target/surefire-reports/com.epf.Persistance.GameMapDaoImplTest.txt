@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
-Test set: com.epf.Persistance.GameMapDaoImplTest
+Test set: com.epf.Persistance.GAmeMapDaoImplTest
 -------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.316 s -- in com.epf.Persistance.GameMapDaoImplTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.021 s -- in com.epf.Persistance.GAmeMapDaoImplTest
