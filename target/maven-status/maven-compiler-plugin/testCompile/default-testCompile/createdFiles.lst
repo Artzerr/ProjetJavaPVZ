@@ -3,3 +3,4 @@ com\epf\Persistance\ZombieDaoImplTest.class
 com\epf\API\GameMapControllerTest.class
 com\epf\API\ZombieControllerTest.class
 com\epf\Persistance\PlantDaoImplTest.class
+com\epf\Persistance\GameMapDaoImplTest.class

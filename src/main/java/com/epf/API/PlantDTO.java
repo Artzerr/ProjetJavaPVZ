@@ -1,7 +1,5 @@
 package com.epf.API;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class PlantDTO {
     private long id_plante;
     private String nom;
