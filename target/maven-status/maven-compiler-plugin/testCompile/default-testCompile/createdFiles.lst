@@ -1,6 +1,9 @@
+com\epf\API\PlantDTOTest.class
 com\epf\API\PlantControllerTest.class
 com\epf\Persistance\GAmeMapDaoImplTest.class
 com\epf\Persistance\ZombieDaoImplTest.class
-com\epf\API\GameMapControllerTest.class
 com\epf\API\ZombieControllerTest.class
+com\epf\API\ZombieDTOTest.class
+com\epf\API\GameMapDTOTest.class
+com\epf\API\GameMapControllerTest.class
 com\epf\Persistance\PlantDaoImplTest.class
