@@ -19,6 +19,7 @@ com\epf\API\PlantController.class
 com\epf\API\CoursEpfBack.class
 com\epf\Core\ZombieServiceImpl.class
 com\epf\API\ZombieController.class
+com\epf\API\MapDTO.class
 com\epf\Core\ZombieService.class
 com\epf\Main.class
 com\epf\API\ZombieDTO.class
