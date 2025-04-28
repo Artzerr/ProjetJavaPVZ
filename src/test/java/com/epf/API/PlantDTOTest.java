@@ -1,9 +1,21 @@
 package com.epf.API;
 
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import jakarta.validation.ValidatorFactory;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PlantDTOTest {
+    private static Validator validator;
+
+    @BeforeAll
+    public static void setupValidator() {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        validator = factory.getValidator();
+    }
+
     @Test
     void testPlantDTOCreation() {
         PlantDTO plant = new PlantDTO();
@@ -49,5 +61,41 @@ public class PlantDTOTest {
         assertEquals(plant1.getPoint_de_vie(), plant2.getPoint_de_vie());
         assertEquals(plant1.getAttaque_par_seconde(), plant2.getAttaque_par_seconde());
         assertEquals(plant1.getDegat_attaque(), plant2.getDegat_attaque());
+    }
+
+    @Test
+    void testInvalidPlantDTO() {
+        PlantDTO plant = new PlantDTO();
+        plant.setId_plante(1L);
+        plant.setNom("");  // invalid: empty name
+        plant.setPoint_de_vie(-100);  // invalid: negative health
+        plant.setAttaque_par_seconde(-1.0);  // invalid: negative attack speed
+        plant.setDegat_attaque(-20);  // invalid: negative damage
+        plant.setCout(-100);  // invalid: negative cost
+        plant.setSoleil_par_seconde(-25.0);  // invalid: negative sun production
+        plant.setEffet("invalid");  // invalid: wrong effect value
+        
+        var violations = validator.validate(plant);
+        assertEquals(7, violations.size());
+    }
+
+    @Test
+    void testValidEffets() {
+        PlantDTO plant = new PlantDTO();
+        plant.setEffet("normal");
+        assertTrue(validator.validate(plant).stream()
+            .noneMatch(violation -> violation.getPropertyPath().toString().equals("effet")));
+        
+        plant.setEffet("slow low");
+        assertTrue(validator.validate(plant).stream()
+            .noneMatch(violation -> violation.getPropertyPath().toString().equals("effet")));
+        
+        plant.setEffet("slow medium");
+        assertTrue(validator.validate(plant).stream()
+            .noneMatch(violation -> violation.getPropertyPath().toString().equals("effet")));
+        
+        plant.setEffet("slow stop");
+        assertTrue(validator.validate(plant).stream()
+            .noneMatch(violation -> violation.getPropertyPath().toString().equals("effet")));
     }
 }

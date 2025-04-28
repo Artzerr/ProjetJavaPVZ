@@ -1,14 +1,35 @@
 package com.epf.API;
 
+import jakarta.validation.constraints.*;
+
 public class PlantDTO {
     private long id_plante;
+    
+    @NotBlank(message = "Le nom ne peut pas être vide")
+    @Size(max = 255, message = "Le nom ne peut pas dépasser 255 caractères")
     private String nom;
+    
+    @Min(value = 0, message = "Les points de vie doivent être positifs")
     private int point_de_vie;
+    
+    @Min(value = 0, message = "L'attaque par seconde doit être positive")
+    @Digits(integer = 3, fraction = 2, message = "L'attaque par seconde doit avoir au maximum 3 chiffres et 2 décimales")
     private double attaque_par_seconde;
+    
+    @Min(value = 0, message = "Les dégâts d'attaque doivent être positifs")
     private int degat_attaque;
+    
+    @Min(value = 0, message = "Le coût doit être positif")
     private int cout;
+    
+    @Min(value = 0, message = "Le soleil par seconde doit être positif")
+    @Digits(integer = 3, fraction = 2, message = "Le soleil par seconde doit avoir au maximum 3 chiffres et 2 décimales")
     private double soleil_par_seconde;
+    
+    @Pattern(regexp = "normal|slow low|slow medium|slow stop", message = "L'effet doit être l'une des valeurs suivantes: normal, slow low, slow medium, slow stop")
     private String effet;
+    
+    @Size(max = 255, message = "Le chemin d'image ne peut pas dépasser 255 caractères")
     private String chemin_image;
 
     public PlantDTO() {}
